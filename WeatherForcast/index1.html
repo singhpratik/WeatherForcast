@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Weather Report
+</title>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="weather.css">
+
+<!-- Optional theme -->
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </head>
+<body>
+<div class="container-fluid background1">
+
+	<div class="row">
+		<div class="col-md-12">
+								<nav class="navbar navbar-default navbar-fixed-top">
+					 
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						  </button>
+						  <a class="navbar-brand" href="#">Weather Test</a>
+						</div>
+
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						  <ul class="nav navbar-nav" ng-app="MyApp" ng-controller="MyCtrl">
+							<li ><a href="#">About</a></li>
+							<li ><a href="#">Careers</a></li>
+							<li class="dropdown">
+							  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+							  <ul class="dropdown-menu" >
+								<li><a href="#">Action</a></li>
+								<li><a href="#">Another action</a></li>
+								<li><a href="#">Something else here</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Separated link</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="#">One more separated link</a></li>
+							  </ul>
+							</li>
+							<li >
+								<div class="form-inline alignTop">
+								Celsius:<input class="form-control" type="text" ng-model="degree">
+								</div>
+								
+							</li>
+							
+							<li>
+							<div class="form-inline alignTop">
+								Fahrenheit:<input type="text" class="form-control" ng-value="far()" disabled>
+								</div>
+								
+							</li>
+						  </ul>
+						  <form class="navbar-form navbar-right" role="search">
+							<div class="form-group">
+							
+							  <input type="text" id="city" class="form-control" placeholder="Search" >
+							</div>
+							<button type="button" onclick="test()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Search</button>
+							
+						
+							
+							
+						  </form>
+						  
+						</div><!-- /.navbar-collapse -->
+					  
+					</nav>
+		</div>
+	</div><!--endof first row-->
+	
+	<!--Modal-->
+	<div id="myModal" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+							  <div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Modal Header</h4>
+							  </div>
+							  <div class="modal-body">
+							  <div class="row">
+								<div class="col-md-4">
+									Weather
+								</div>
+								<div class="col-md-4" id="testing123">
+									
+								</div>
+								<div class="col-md-4" id="testing223">
+									
+								</div>
+							  </div>
+							   <div class="row">
+								<div class="col-md-4">
+									Cloud
+								</div>
+								<div class="col-md-4" id="testing124">
+									
+								</div>
+								<div class="col-md-4">
+									
+								</div>
+							  </div>
+							  <div class="row">
+								<div class="col-md-4">
+									Wind Speed
+								</div>
+								<div class="col-md-4" id="testing125">
+									
+								</div>
+								<div class="col-md-4">
+									
+								</div>
+							  </div>
+							  <div class="row">
+								
+								<div class="col-md-4">
+									Latitude:
+								</div>
+								<div class="col-md-4" id="testing127">
+									
+								</div>
+								<div class="col-md-4" >
+									
+								</div>
+							  </div>
+							  <div class="row">
+								<div class="col-md-4">
+									Longitude:
+								</div>
+								<div class="col-md-4" id="testing126">
+									
+								</div>
+								<div class="col-md-4">
+									
+								</div>
+								
+							  </div>
+							    <div class="row">
+								<div class="col-md-4">
+									Average Temperature
+								</div>
+								<div class="col-md-4" id="testing128">
+									
+								</div>
+								<div class="col-md-4">
+									
+								</div>
+								
+							  </div>
+							   <div class="row">
+								<div class="col-md-4">
+									humidity
+								</div>
+								<div class="col-md-4" id="testing129">
+									
+								</div>
+								<div class="col-md-4">
+									
+								</div>
+								
+							  </div>
+							  
+							  </div>
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							  </div>
+							</div>
+
+						  </div>
+						</div>
+		<!---->
+	
+	<div class="row">
+		<div class="col-md-12">
+						<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+						  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+						  <li data-target="#myCarousel" data-slide-to="1"></li>
+						  <li data-target="#myCarousel" data-slide-to="2"></li>
+						  <li data-target="#myCarousel" data-slide-to="3"></li>
+						</ol>
+
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner" role="listbox">
+
+						  <div class="item active">
+							<img src="image/snowy1.jpg" alt="snow" width="460" height="345">
+							<div class="carousel-caption">
+							  <h3>Weather For All</h3>
+							  <p>Our brand mission is to make quality weather information available to every person on this planet.</p>
+							</div>
+						  </div>
+
+						  <div class="item">
+							<img src="image/foggy1.jpg" alt="windy" width="460" height="345">
+							<div class="carousel-caption">
+							  <h3>Together We Know More</h3>
+							  <p>The beating heart of our brand is the generous and passionate community of weather enthusiasts that share weather data and content across our products</p>
+							</div>
+						  </div>
+						
+						  <div class="item">
+							<img src="image/partly-cloudy1.jpg" alt="cloudy" width="460" height="345">
+							<div class="carousel-caption">
+							  <h3>Data as Design</h3>
+							  <p>We have created a user experience that enables you to find as much weather data as you need as quickly as possible.</p>
+							</div>
+						  </div>
+
+						  <div class="item">
+							<img src="image/sun1.jpg" alt="sunny" width="460" height="345">
+							<div class="carousel-caption">
+							  <h3>An Alternative Outlook</h3>
+							  <p>As the Internet's 1st weather service, we consider ourselves pioneers within our field and we're constantly seeking new data sets and the next technologies</p>
+							</div>
+						  </div>
+					  
+						</div>
+
+						<!-- Left and right controls -->
+						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+						  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						  <span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+						  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+						  <span class="sr-only">Next</span>
+						</a>
+					  </div>
+		</div><!--end of corousel div-->
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<img src="image/image1.png" alt="image1">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" id="spacing">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-12">
+						<img src="image/image2.png">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<img src="image/monsoon1.jpg" alt="monsoon" class="img-rounded test4">
+					</div>
+					<div class="col-md-6">
+						<span class="fontDisplay1">Monsoon 2016</span><br /><br />
+						<span class="fontDisplay1">Foreshadow - August Update</span><br /><br />
+						<span class="fontDisplay2">Update on</span><span> Feb 06,2016</span><br />
+						<br />
+						<button type="button" class="btn buttonColor">Report</button>
+					</div>
+					
+				</div>
+			</div>
+		</div><!--End of div for col6 for 1st half-->
+		<div class="col-md-6">
+			<div class="col-md-10 align">
+				<div class="row">
+					<div class="col-md-12">
+						<img src="image/image3.png">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 align">
+						<img src="image/summer1.jpg" class="img-rounded test4">
+					</div>
+					<div class="col-md-6 align">
+						<span class="fontDisplay3">Warmest Feb so far </span><br/>
+						<span class="fontDisplay3">in 10 yrs..</span><br/><br/>
+					<span class="fontDisplay2">Posted on</span><span> March 06,2016</span><br />
+						<br />
+						<button type="button" class="btn buttonColor">Report</button>
+					</div>
+				</div>
+			</div><!--End of div for col6 for 1st half-->
+			<div class="col-md-2">
+				
+			</div>
+		</div>
+	</div><!--end of row for first column-->
+	<div class="row">
+		<div class="col-md-12" id="spacing">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-10">
+				<div class="row">
+					<div class="col-md-12">
+						<img src="image/image2.png">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<img src="image/winter1.jpg" alt="winter" class="img-rounded test4">
+					</div>
+					<div class="col-md-6">
+						<span class="fontDisplay1">Winter 2016</span><br /><br />
+						<span class="fontDisplay1">Foreshadow - November Update</span><br /><br />
+						<span class="fontDisplay2">Update on</span><span> March 12,2016</span><br /><br />
+						<button type="button" class="btn buttonColor">Report</button>
+					</div>
+					
+				</div>
+			</div>
+		</div><!--End of div for col6 for 1st half-->
+		<div class="col-md-6">
+			<div class="col-md-10 align">
+				<div class="row">
+					<div class="col-md-12 align">
+						<img src="image/image3.png">
+					</div>
+					<div class="row">
+					<div class="col-md-6">
+					<MAP NAME="index"> <AREA HREF="image/radar.jpg" ALT="radar" COORDS="10,10,120,120" SHAPE=RECT onClick="return popup(this, 'gloss')">
+					<AREA SHAPE=DEFAULT NOHREF></MAP>
+						<img src="image/radar.jpg" alt="winter" class="img-rounded test4" USEMAP="#index">
+					</div>
+					<div class="col-md-6">
+						<span class="fontDisplay1">Weather Conditions</span><br /><br />
+						<span class="fontDisplay1">The Current Radar map  </span><br /><br />
+						<span class="fontDisplay1">shows areas of current</span><span class="fontDisplay1">  precipitation</span><br /><br />
+						<button type="button" class="btn buttonColor">Report</button>
+					</div>
+					
+				</div>
+				</div>
+			</div><!--End of div for col6 for 1st half-->
+			<div class="col-md-2">
+				
+			</div>
+		</div>
+	</div><!--end of row for first column-->
+	<div class="row">
+		<div class="col-md-12" id="spacing">
+	</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<img src="image/image5.png" alt="image5" class="heightWidthImage">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 footer2">
+			<div class="col-md-2">
+				
+			</div>
+			<div class="col-md-8">
+				<span class="footer1">Click here to see how's is  the Weather</span><br/>
+				<button type="button" class="btn buttonColor">www.weathertoday.com</button>
+			</div>
+			<div class="col-md-2">
+				
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 footer4">
+			<div class="col-md-4">
+				<span class="footer6"><a class="footer6" href="#">Services</a>&nbsp;|&nbsp;<a href="#" class="footer6">About</a>&nbsp;|&nbsp;<a href="#" class="footer6">Clients</a>&nbsp;|&nbsp;<a href="#" class="footer6">Contacts</a>&nbsp;</span>
+				<span>©WeatherToday Services Pvt. Ltd, 2016</span>
+			</div>
+			<div class="col-md-6">
+				<img src="image/logo1.jpg" alt="weatherToday" height="150px" width="300px">
+			</div>
+			<div class="col-md-2">
+			<img src="image/symbols.PNG" alt="socialMedia">	
+			</div>
+		</div>
+	</div>
+	
+</div>
+<script>
+
+//the following code is used to define the new module and controller converts celcius to fahrenheit
+	var app = angular.module('MyApp',[]);
+	app.controller("MyCtrl",function($scope){
+	$scope.degree = 0;
+	$scope.far = function() {
+        return $scope.degree*1.8+32;
+    };
+	});
+	
+
+function test(){
+$( "#testing123" ).empty();$( "#testing124" ).empty();$( "#testing125" ).empty();$( "#testing126" ).empty();$( "#testing127" ).empty();$( "#testing128" ).empty();$( "#testing129" ).empty();
+
+$('#testing223').empty();
+
+var city = document.getElementById("city").value;
+
+(function() {
+alert(city);
+debugger;
+
+//API Integration
+
+var flickerAPI = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=f5b3fd3bc422a2f37433d1af5c728f97";
+
+$.getJSON( flickerAPI, function( json ) {
+
+$( "#testing123" ).append( json.weather[1].main);
+$( "#testing124" ).append( json.clouds.all);
+$( "#testing125" ).append( json.wind.speed);
+$( "#testing126" ).append( json.coord.lon);
+$( "#testing127" ).append( json.coord.lat);
+$( "#testing128" ).append( json.main.temp);
+$( "#testing129" ).append( json.main.humidity);
+
+
+if((json.weather[1].main).match("Mist")){
+$('#testing223').append('<img  src="image/mist.gif" height="70px" width="70px"/>');
+}
+
+if((json.weather[1].main).match("Fog")){
+$('#testing223').append('<img  src="image/fog.gif" height="70px" width="70px"/>');
+}
+
+if((json.weather[1].main).match("Haze")){
+$('#testing223').append('<img  src="image/mist.gif" height="70px" width="70px"/>');
+}
+
+if((json.weather[1].main).match("Rain")){
+$('#testing223').append('<img  src="image/rain.gif" height="70px" width="70px"/>');
+}
+
+
+ }); 
+ })();
+ 
+ };
+	
+	
+	
+</script>
+</body>
+</html>
